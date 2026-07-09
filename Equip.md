@@ -14,10 +14,10 @@ Helping others follow Jesus
 Each person is unique. Some are ahead in their spiritual journey and some are just beginning theirs
 
 >19 “Come, follow me,” Jesus said, “and I will send you out to fish for people.”
-- Matthew 4:19
+> - Matthew 4:19
 
 >11 So Christ himself gave the apostles, the prophets, the evangelists, the pastors and teachers, 12 to equip his people for works of service, so that the body of Christ may be built up 13 until we all reach unity in the faith and in the knowledge of the Son of God and become mature, attaining to the whole measure of the fullness of Christ.
-- Ephesians 4:11-13
+>- Ephesians 4:11-13
 
 #### The Performance-Driven Trap
 ![[Pasted image 20260709154532.png]]
@@ -28,13 +28,13 @@ Each person is unique. Some are ahead in their spiritual journey and some are ju
 ![[Pasted image 20260709155148.png]]
 
 > 18 All this is from God, who reconciled us to himself through Christ and gave us the ministry of reconciliation: 19 that God was reconciling the world to himself in Christ, not counting people’s sins against them. And he has committed to us the message of reconciliation.
-- 2 Corinthians 5:18-19
+> - 2 Corinthians 5:18-19
 #### The Ephesians 4 Blueprint
 ![[Pasted image 20260709155052.png]]
 - *Equip the saints* for the work of ministry
 
 > 11 So Christ himself gave the apostles, the prophets, the evangelists, the pastors and teachers, 12 **to equip his people for works of service**, so that the body of Christ may be built up
-- Ephesians 4:11-12
+>- Ephesians 4:11-12
 
 #### The Paralyzing Myths
 ![[Pasted image 20260709155710.png]]

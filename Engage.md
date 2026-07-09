@@ -5,22 +5,22 @@ Ptr. Manny
 #### Strategy: Make discipleship a way of life
 
 > 23 And he said to all, “If anyone would come after me, let him deny himself and take up his cross daily and follow me.
-- Luke 9:23
+ - Luke 9:23
 
->17 “**COME**, follow me,” Jesus said, “and I will send you out to fish for people.”
-- Mark 1:17  
+>17 “**COME**, follow me,” Jesus said, “and I will send you out to fish for people.
+>- Mark 1:17  
 
 >"Engaging someone begins the moment we start the conversation with someone that will eventually turn the conversation to sharing the gospel"
-- Jimmy Scroggins & Steve Wright 
+>- Jimmy Scroggins & Steve Wright 
 
 >7 A woman from Samaria came to draw water. Jesus said to her, “Give me a drink.” 8 (For his disciples had gone away into the city to buy food.) 
-- John 4:7-8
+>- John 4:7-8
 
 #### *Mindset and Method*
 *Guiding Principles for Engaging Others Effectively*
 
-According to **Dale Carnegie**:  
 >"You do not have to be interesting like someone dazzling, but you can ve interested with people."
+>- Dale Carnegie
 
 To **ENGAGE** is to **SIMPLY TALK TO PEOPLE**
 - To show interest is to show importance

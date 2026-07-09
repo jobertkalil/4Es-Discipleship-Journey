@@ -1,4 +1,5 @@
 
+# Strategic Training for the 4Es Discipleship Journey
 Victory BGC, Every Nation Building  
 July 9, 2026
 
@@ -6,7 +7,7 @@ July 9, 2026
 [[Engage]] -> [[Establish]] ->[[Equip]] -> [[Empower]]
 
 >"Discipleship is not a program or an event; it is a way of life. It is not for a limited time, but for our whole life"
-- Bill Hull
+ - Bill Hull
 
 #### The Discipleship Journey can be grouped into 2
 1. **Engage** and **Establish**

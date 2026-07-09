@@ -3,7 +3,7 @@ Ptr. Manny
 2nd Step in the Discipleship Journey
 
 >17 “Come, **FOLLOW ME**,” Jesus said, “and I will send you out to fish for people.”
-- Mark 1:17  
+>- Mark 1:17  
 
 Foundation is important as we disciple
 
@@ -23,7 +23,7 @@ Proving Question:
 Are they being established in the faith, or are they merely being Christianized
 
 > 11 For no one can lay any foundation other than the one already laid, which is Jesus Christ.
-- 1 Corinthians 3:11
+> - 1 Corinthians 3:11
 #### Foundational factors in Establishing a Disciple
 1. **Faith**
 	- By understanding salvation
