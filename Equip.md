@@ -56,6 +56,10 @@ Each person is unique. Some are ahead in their spiritual journey and some are ju
 #### The Equipping Shift
 ![[Pasted image 20260709160556.png]]
 
+#### Discussion Questions:
+- Evaluate your current leadership development program. Do you believe in the next generation enough to place them in key roles in your church?
+- How long does it take for you to make a member a minister or a key leader in your church?
 #### Tools/Environments
 - Victory Groups (Small groups, Life groups)
 - Making Disciples
+
