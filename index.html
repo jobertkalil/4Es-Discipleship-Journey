@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 4E's Discipleship Journey</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --engage: #2563eb;
+    --engage-light: #eff6ff;
+    --establish: #7c3aed;
+    --establish-light: #f5f3ff;
+    --equip: #059669;
+    --equip-light: #ecfdf5;
+    --empower: #dc2626;
+    --empower-light: #fef2f2;
+    --radius: 16px;
+    --max-w: 720px;
+  }
+
+  /* Light theme (default) */
+  :root, [data-theme="light"] {
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.03);
+    --scripture-bg: #f1f5f9;
+    --myth-bg: #fef2f2;
+    --myth-border: #fecaca;
+    --myth-text: #991b1b;
+    --truth-bg: #ecfdf5;
+    --truth-border: #a7f3d0;
+    --truth-text: #065f46;
+    --header-bg: rgba(250,250,250,0.85);
+    --illustration-bg: #fff;
+  }
+
+  /* Dark theme */
+  [data-theme="dark"] {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --border: #334155;
+    --border-light: #1e293b;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.15);
+    --scripture-bg: #1e293b;
+    --myth-bg: rgba(220,38,38,0.08);
+    --myth-border: rgba(220,38,38,0.25);
+    --myth-text: #fca5a5;
+    --truth-bg: rgba(5,150,105,0.08);
+    --truth-border: rgba(5,150,105,0.25);
+    --truth-text: #6ee7b7;
+    --header-bg: rgba(15,23,42,0.85);
+    --illustration-bg: #1e293b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page router ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ════════════════════════════════════════════════════════
+     HOME PAGE
+     ════════════════════════════════════════════════════════ */
+  .home-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .home-header h1 {
+    font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .home-header .meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+  }
+  .home-header blockquote {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    border-left: 3px solid var(--establish);
+    padding-left: 1rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  .home-header blockquote cite {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    font-style: normal;
+  }
+
+  /* Focus groupings */
+  .focus-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    max-width: 640px;
+    margin: 0 auto 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+  .focus-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Step cards */
+  .cards {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .cards + .focus-label { margin-top: 2rem; }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .step-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .step-card:active { transform: translateY(0); }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .card-body { flex: 1; min-width: 0; }
+  .card-body h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-body h3 .arrow {
+    margin-left: auto;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+  }
+  .step-card:hover .arrow { transform: translateX(3px); }
+  .card-body p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .card-body .verse {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    font-style: italic;
+  }
+
+  /* Slides link at bottom of home */
+  .slides-link-wrapper {
+    max-width: 640px;
+    margin: 3rem auto 0;
+    padding: 0 1.5rem 4rem;
+  }
+  .slides-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .slides-link:hover { background: var(--border-light); }
+  .slides-link .icon { font-size: 1.2rem; opacity: 0.5; }
+  .slides-link .label { font-weight: 500; }
+  .slides-link .hint { margin-left: auto; font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ════════════════════════════════════════════════════════
+     DETAIL PAGES
+     ════════════════════════════════════════════════════════ */
+  .detail-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    transition: background 0.15s;
+    font-family: inherit;
+  }
+  .back-btn:hover { background: var(--border-light); }
+  .detail-header .page-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Step indicator pill in header */
+  .step-pill {
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .detail-body {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .detail-body h2 {
+    font-size: clamp(1.6rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .detail-body .speaker {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .detail-body .focus-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1.75rem;
+  }
+  .badge-god { background: var(--establish-light); color: var(--establish); }
+  .badge-others { background: var(--equip-light); color: var(--equip); }
+
+  .detail-body h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 2.25rem 0 0.75rem;
+    color: var(--text);
+  }
+  .detail-body h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--text);
+  }
+  .detail-body p { margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--text-secondary); }
+  .detail-body strong { color: var(--text); }
+  .detail-body ul, .detail-body ol { margin: 0.5rem 0 1rem 1.25rem; font-size: 0.95rem; color: var(--text-secondary); }
+  .detail-body li { margin-bottom: 0.35rem; }
+  .detail-body li strong { color: var(--text); }
+
+  /* Scripture */
+  .scripture {
+    background: var(--scripture-bg);
+    border-left: 3px solid var(--establish);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .scripture strong { font-style: normal; color: var(--text); }
+  .scripture .ref {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* Quote */
+  .quote {
+    background: var(--scripture-bg);
+    border-left: 3px solid var(--text-muted);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .quote .author {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* Acronym card */
+  .acronym-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .acronym-card h4 { margin: 0 0 0.75rem; font-size: 1rem; }
+  .acronym-card ul { list-style: none; margin: 0; padding: 0; }
+  .acronym-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+  }
+  .acronym-card li:last-child { border: none; }
+  .acronym-card .letter { font-weight: 800; font-size: 1.1rem; margin-right: 0.25rem; }
+
+  /* Illustration images */
+  .illustration {
+    margin: 1.5rem 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    background: var(--illustration-bg);
+  }
+  .illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .illustration figcaption {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+  }
+
+  /* Discussion */
+  .discussion {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .discussion h4 {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Myth / Truth cards */
+  .myth-truth-pair {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  @media (min-width: 601px) { .myth-truth-pair { grid-template-columns: 1fr 1fr; } }
+  .myth-box, .truth-box {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+  }
+  .myth-box {
+    background: var(--myth-bg);
+    border: 1px solid var(--myth-border);
+    color: var(--myth-text);
+  }
+  .truth-box {
+    background: var(--truth-bg);
+    border: 1px solid var(--truth-border);
+    color: var(--truth-text);
+  }
+  .myth-box h4 { color: #dc2626; margin: 0 0 0.5rem; font-size: 0.9rem; }
+  .truth-box h4 { color: #059669; margin: 0 0 0.5rem; font-size: 0.9rem; }
+  [data-theme="dark"] .myth-box h4 { color: #f87171; }
+  [data-theme="dark"] .truth-box h4 { color: #34d399; }
+
+  /* Shift table */
+  .shift-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .shift-table th {
+    background: var(--scripture-bg);
+    padding: 0.65rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+  }
+  .shift-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .shift-table .myth-col { color: #dc2626; }
+  .shift-table .truth-col { color: #059669; font-weight: 500; }
+  .shift-table .arrow { text-align: center; width: 36px; color: var(--text-muted); }
+
+  /* Nav between steps */
+  .step-nav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .step-nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .step-nav a:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+  .step-nav a .dir { font-size: 0.75rem; color: var(--text-muted); }
+  .step-nav a .name { font-weight: 600; color: var(--text); }
+
+  /* ════════════════════════════════════════════════════════
+     SLIDES PAGE (de-emphasized)
+     ════════════════════════════════════════════════════════ */
+  .slides-page-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 4rem;
+  }
+  .slides-page-body h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-secondary);
+  }
+  .slides-page-body .slides-hint {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+  .canva-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .canva-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* ════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════ */
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--establish); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── Theme toggle ── */
+  .theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 300;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: background 0.2s;
+  }
+  .theme-toggle:hover { background: var(--border-light); }
+
+  /* ── Scroll-to-top ── */
+  .scroll-top {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    z-index: 200;
+    transition: opacity 0.3s;
+  }
+  .scroll-top.visible { display: flex; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HOME
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="home-header">
+    <h1>The 4E's Discipleship Journey</h1>
+    <p class="meta">Victory BGC, Every Nation Building &mdash; July 9, 2026</p>
+    <blockquote>
+      "Discipleship is not a program or an event; it is a way of life. It is not for a limited time, but for our whole life."
+      <cite>&mdash; Bill Hull</cite>
+    </blockquote>
+  </div>
+
+  <!-- Group 1 -->
+  <div class="focus-label">Relationship with God</div>
+  <div class="cards">
+    <a class="step-card" onclick="showPage('engage')">
+      <div class="card-icon" style="background:var(--engage);">1</div>
+      <div class="card-body">
+        <h3>Engage <span class="arrow">&rsaquo;</span></h3>
+        <p>Discipleship begins with relationships, not programs. To engage is to simply talk to people &mdash; start conversations that eventually turn toward sharing the gospel.</p>
+        <p class="verse">"Come, follow me." &mdash; Mark 1:17</p>
+      </div>
+    </a>
+    <a class="step-card" onclick="showPage('establish')">
+      <div class="card-icon" style="background:var(--establish);">2</div>
+      <div class="card-body">
+        <h3>Establish <span class="arrow">&rsaquo;</span></h3>
+        <p>Make firm and stable. Build a foundation rooted in Jesus &mdash; not in personalities &mdash; through faith, the Word, prayer, and the church community.</p>
+        <p class="verse">"Come, follow me." &mdash; Mark 1:17</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- Group 2 -->
+  <div class="focus-label">Reaching out to others</div>
+  <div class="cards">
+    <a class="step-card" onclick="showPage('equip')">
+      <div class="card-icon" style="background:var(--equip);">3</div>
+      <div class="card-body">
+        <h3>Equip <span class="arrow">&rsaquo;</span></h3>
+        <p>Every member is a minister. Break free from the performance-driven trap and equip believers with basic ministry skills so the body of Christ can be built up.</p>
+        <p class="verse">"...to equip his people for works of service." &mdash; Ephesians 4:12</p>
+      </div>
+    </a>
+    <a class="step-card" onclick="showPage('empower')">
+      <div class="card-icon" style="background:var(--empower);">4</div>
+      <div class="card-body">
+        <h3>Empower <span class="arrow">&rsaquo;</span></h3>
+        <p>Don't slow people down. A disciple maker only needs to be one chapter ahead. The more we minister, the more we mature &mdash; empower others immediately.</p>
+        <p class="verse">"I will make you fishers of men." &mdash; Mark 1:17</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- Slides link (de-emphasized) -->
+  <div class="slides-link-wrapper">
+    <a class="slides-link" onclick="showPage('slides')">
+      <span class="icon">&#9654;</span>
+      <span class="label">View presentation slides</span>
+      <span class="hint">25 slides &rsaquo;</span>
+    </a>
+  </div>
+
+  <footer>
+    Strategic Training for the 4E's Discipleship Journey &mdash; Victory BGC<br>
+    July 9, 2026
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     ENGAGE
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-engage">
+  <div class="detail-header">
+    <button class="back-btn" onclick="showPage('home')">&larr; Home</button>
+    <span class="step-pill" style="background:var(--engage);">Step 1</span>
+    <span class="page-title">Engage</span>
+  </div>
+  <div class="detail-body">
+    <h2 style="color:var(--engage);">Engage</h2>
+    <p class="speaker">Ptr. Manny &mdash; 1st Step in the Discipleship Journey</p>
+    <span class="focus-badge badge-god">Relationship with God</span>
+
+    <h3>Strategy: Make discipleship a way of life</h3>
+
+    <div class="scripture">
+      <strong>23</strong> Whoever wants to be my disciple must deny themselves and take up their cross daily and follow me.
+      <span class="ref">&mdash; Luke 9:23</span>
+    </div>
+    <div class="scripture">
+      <strong>17</strong> And Jesus said to them, "<strong>COME</strong>, follow me, and <strong>I will make you fishers</strong> of men."
+      <span class="ref">&mdash; Mark 1:17</span>
+    </div>
+    <div class="scripture">
+      <strong>17</strong> Jesus called out to them, "Come, follow me, and <strong>I will show you how to fish for people!</strong>"
+      <span class="ref">&mdash; Mark 1:17 (NLT)</span>
+    </div>
+
+    <h3>Two Essential Dimensions</h3>
+    <ul>
+      <li><strong>Holy Spirit</strong> &mdash; Disciple-making finds its true power through the empowerment of the Holy Spirit. (Acts 1:8)</li>
+      <li><strong>Relational</strong> &mdash; Discipleship is relationship. True discipleship involves deep relationships. (John 13:34-35)</li>
+    </ul>
+
+    <div class="quote">
+      "Engaging someone begins the moment we start the conversation with someone that will eventually turn the conversation to sharing the gospel."
+      <span class="author">&mdash; Jimmy Scroggins &amp; Steve Wright</span>
+    </div>
+
+    <div class="scripture">
+      <strong>7</strong> A woman from Samaria came to draw water. Jesus said to her, "Give me a drink." <strong>8</strong> (For his disciples had gone away into the city to buy food.)
+      <span class="ref">&mdash; John 4:7-8</span>
+    </div>
+
+    <h3>Mindset and Method</h3>
+    <h4>Guiding Principles for Engaging Others Effectively</h4>
+
+    <div class="quote">
+      "You do not have to be interesting like someone dazzling, but you can be <em>interested</em> with people."
+      <span class="author">&mdash; Dale Carnegie</span>
+    </div>
+
+    <p>To <strong>ENGAGE</strong> is to <strong>simply talk to people</strong>.</p>
+    <ul>
+      <li>To show interest is to show importance</li>
+      <li>To engage is to ask diagnostic questions that encourage them to talk about themselves</li>
+      <li>To engage is to find a common interest or connection (music, hobby, sports)</li>
+      <li>Engaging is having the intention of befriending them</li>
+      <li>Be a living testimony to them</li>
+      <li>Goal: to invite them</li>
+      <li>Be of service to them in any way you can</li>
+    </ul>
+
+    <h3>James Engel Scale &mdash; Steps to Christ</h3>
+    <figure class="illustration">
+      <img src="files/Pasted%20image%2020260709141550.png" alt="James Engel Scale - Steps to Christ" loading="lazy">
+      <figcaption>The Engel Scale: from no awareness of God to sharing faith with others</figcaption>
+    </figure>
+
+    <h3>Strategic Lessons &mdash; Method in Engaging</h3>
+    <div class="acronym-card">
+      <h4>S.A.L.T. Method <span style="color:var(--text-muted);font-weight:400;font-size:0.82rem;">(Dr. Rice Broocks)</span></h4>
+      <ul>
+        <li><span class="letter" style="color:var(--engage);">S</span> &mdash; <strong>Start</strong> the conversation</li>
+        <li><span class="letter" style="color:var(--engage);">A</span> &mdash; <strong>Ask</strong> questions</li>
+        <li><span class="letter" style="color:var(--engage);">L</span> &mdash; <strong>Listen</strong> to them</li>
+        <li><span class="letter" style="color:var(--engage);">T</span> &mdash; <strong>Tell</strong> a story</li>
+      </ul>
+    </div>
+
+    <p><strong>To engage:</strong> Discipleship begins with relationships, not programs.</p>
+    <p><strong>Tool:</strong> Best News Ever or Two Verse Evangelism</p>
+    <p><strong>Recommended reading:</strong> <em>Conspiracy of Kindness</em> by Steve Sjogren</p>
+
+    <h3>Biblical Principles on Engaging Others</h3>
+    <div class="scripture">
+      <strong>1</strong> After this the Lord appointed seventy-two others and sent them two by two ahead of him to every town and place where he was about to go. <strong>2</strong> He told them, "The harvest is plentiful, but the workers are few. Ask the Lord of the harvest, therefore, to send out workers into his harvest field."
+      <span class="ref">&mdash; Luke 10:1-2 (NIV)</span>
+    </div>
+    <ul>
+      <li>You have a support team (para pag napasabak ka may back up)</li>
+      <li>You are well motivated (di ka tatamarin)</li>
+      <li>Ask the Lord to serve as engage team</li>
+      <li>Increase the numbers of workers</li>
+      <li>Mobilize workers to the harvest field</li>
+    </ul>
+
+    <div class="discussion">
+      <h4>Group Discussion Questions</h4>
+      <ol>
+        <li>What is your biggest challenge in engaging people? Why, and how do you overcome it?</li>
+        <li>Share your personal experience of how someone engaged you.</li>
+      </ol>
+    </div>
+
+    <div class="step-nav">
+      <a onclick="showPage('home')"><span class="dir">&larr; Back</span><span class="name">Home</span></a>
+      <a onclick="showPage('establish')"><span class="dir">Next &rarr;</span><span class="name">Establish</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     ESTABLISH
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-establish">
+  <div class="detail-header">
+    <button class="back-btn" onclick="showPage('home')">&larr; Home</button>
+    <span class="step-pill" style="background:var(--establish);">Step 2</span>
+    <span class="page-title">Establish</span>
+  </div>
+  <div class="detail-body">
+    <h2 style="color:var(--establish);">Establish</h2>
+    <p class="speaker">Ptr. Manny &mdash; 2nd Step in the Discipleship Journey</p>
+    <span class="focus-badge badge-god">Relationship with God</span>
+
+    <div class="scripture">
+      <strong>17</strong> "Come, <strong>FOLLOW ME</strong>," Jesus said, "and I will send you out to fish for people."
+      <span class="ref">&mdash; Mark 1:17</span>
+    </div>
+
+    <p>Foundation is important as we disciple.</p>
+
+    <h3>To Establish (verb)</h3>
+    <ol>
+      <li>"To make firm or stable"</li>
+      <li>"To introduce and cause to grow and multiply"</li>
+    </ol>
+    <p style="font-size:0.82rem;color:var(--text-muted);">&mdash; Merriam-Webster Dictionary</p>
+
+    <p>Anything or anyone that is established can potentially grow and multiply. Therefore, when we establish people or a disciple to follow Jesus, the result is they continue to <strong>grow and multiply</strong>.</p>
+
+    <p>We must have a good facade <strong>AND</strong> good foundation. We must be <strong>rooted in Jesus</strong> and not rooted in personalities.</p>
+
+    <h3>Strategic Process for Establishing a Disciple</h3>
+    <p><strong>Proving Question:</strong> Are they being established in the faith, or are they merely being Christianized?</p>
+
+    <div class="scripture">
+      <strong>11</strong> For no one can lay any foundation other than the one already laid, which is Jesus Christ.
+      <span class="ref">&mdash; 1 Corinthians 3:11</span>
+    </div>
+
+    <h3>Foundational Factors in Establishing a Disciple</h3>
+
+    <h4>1. Faith</h4>
+    <ul>
+      <li>By understanding salvation</li>
+      <li>Do they know how to depend on their faith?</li>
+    </ul>
+
+    <h4>2. By Establishing them in the Word and Prayer</h4>
+    <div class="scripture">
+      <strong>6</strong> And now, just as you accepted Christ Jesus as your Lord, you must continue to follow him. <strong>7</strong> Let your roots grow down into him, and let your lives be built on him. Then your faith will grow strong in the truth you were taught, and you will overflow with thankfulness.<br><br>
+      <strong>8</strong> Don't let anyone capture you with empty philosophies and high-sounding nonsense that come from human thinking and from the spiritual powers of this world, rather than from Christ.
+      <span class="ref">&mdash; Colossians 2:6-8</span>
+    </div>
+    <div class="scripture">
+      <strong>8</strong> Keep this Book of the Law always on your lips; meditate on it day and night, so that you may be careful to do everything written in it. Then you will be prosperous and successful.
+      <span class="ref">&mdash; Joshua 1:8</span>
+    </div>
+    <ul>
+      <li>Berean Jews listened eagerly and searched the Scriptures (Acts of the Apostles)</li>
+      <li>Lessons from Ezra's life: READ, APPLY AND SHARE</li>
+      <li>A.C.T.S. as a young believer (prayer method)</li>
+    </ul>
+
+    <div class="quote">
+      "What would sustain us from life's difficulty is the word of God."
+      <span class="author">&mdash; Bishop Ferdie Cabiling</span>
+    </div>
+
+    <h4>3. By Establishing them in the Church</h4>
+    <ul>
+      <li>Show them the value of the fellowship of the believers</li>
+      <li>Corporate worship</li>
+      <li>Being connected to a small group community is therapeutic</li>
+    </ul>
+
+    <h3>How to Grow Your Small Group?</h3>
+    <p>Small group is just a <em>catch basin</em> &mdash; the goal is not the small group. The goal is <strong>discipleship</strong>.</p>
+
+    <div class="quote">
+      "Small is Big. Big is small."<br>
+      "Slow is fast."
+      <span class="author">&mdash; Imagine the snowball effect (Law of Acceleration in Physics)</span>
+    </div>
+
+    <h4>Biblical Strategy (Luke 10:2)</h4>
+    <p>More leaders, more harvest. Less leaders, less harvest.</p>
+    <ul>
+      <li>If you start small, you will grow big</li>
+      <li>Aim for all your small group members to become disciple-makers</li>
+      <li>Change the environment</li>
+      <li>Spiritual gifts should be discovered, developed, and fully used for God's purpose</li>
+    </ul>
+
+    <h4>To grow your disciples into leaders:</h4>
+    <ul>
+      <li>Show them how you do it</li>
+      <li>Give them opportunities to do what you do</li>
+    </ul>
+
+    <div class="step-nav">
+      <a onclick="showPage('engage')"><span class="dir">&larr; Previous</span><span class="name">Engage</span></a>
+      <a onclick="showPage('equip')"><span class="dir">Next &rarr;</span><span class="name">Equip</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EQUIP
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-equip">
+  <div class="detail-header">
+    <button class="back-btn" onclick="showPage('home')">&larr; Home</button>
+    <span class="step-pill" style="background:var(--equip);">Step 3</span>
+    <span class="page-title">Equip</span>
+  </div>
+  <div class="detail-body">
+    <h2 style="color:var(--equip);">Equip</h2>
+    <p class="speaker">Ptr. Melchor &mdash; 3rd Step in the Discipleship Journey &mdash; <em>Believers to Ministers</em></p>
+    <span class="focus-badge badge-others">Reaching out to others</span>
+
+    <p><strong>Goal:</strong> Equip in basic ministry skills.</p>
+
+    <div class="scripture">
+      <strong>19</strong> "Come, follow me," Jesus said, "and I will send you out to fish for people."
+      <span class="ref">&mdash; Matthew 4:19</span>
+    </div>
+    <div class="scripture">
+      <strong>11</strong> So Christ himself gave the apostles, the prophets, the evangelists, the pastors and teachers, <strong>12</strong> <em>to equip his people for works of service</em>, so that the body of Christ may be built up <strong>13</strong> until we all reach unity in the faith and in the knowledge of the Son of God and become mature, attaining to the whole measure of the fullness of Christ.
+      <span class="ref">&mdash; Ephesians 4:11-13</span>
+    </div>
+
+    <h3>The Performance-Driven Trap</h3>
+    <figure class="illustration">
+      <img src="files/Pasted%20image%2020260709154532.png" alt="The Performance-Driven Trap" loading="lazy">
+      <figcaption>When only professional ministers do ministry, everyone else becomes a passive spectator</figcaption>
+    </figure>
+
+    <h3>The Ministry of Reconciliation</h3>
+    <figure class="illustration">
+      <img src="files/Pasted%20image%2020260709155148.png" alt="The Ministry of Reconciliation" loading="lazy">
+      <figcaption>Every member is a minister &mdash; 2 Corinthians 5:18-19</figcaption>
+    </figure>
+
+    <div class="scripture">
+      <strong>18</strong> All this is from God, who reconciled us to himself through Christ and gave us the ministry of reconciliation: <strong>19</strong> that God was reconciling the world to himself in Christ, not counting people's sins against them. And he has committed to us the message of reconciliation.
+      <span class="ref">&mdash; 2 Corinthians 5:18-19</span>
+    </div>
+
+    <h3>The Ephesians 4 Blueprint</h3>
+    <figure class="illustration">
+      <img src="files/Pasted%20image%2020260709155052.png" alt="The Ephesians 4 Blueprint" loading="lazy">
+      <figcaption>Equip the saints for the work of ministry &mdash; Ephesians 4:11-12</figcaption>
+    </figure>
+
+    <h3>The 3 Paralyzing Myths</h3>
+    <figure class="illustration">
+      <img src="files/Pasted%20image%2020260709155710.png" alt="The Paralyzing Myths" loading="lazy">
+      <figcaption>Three myths that have paralyzed millions of believers worldwide</figcaption>
+    </figure>
+
+    <div class="myth-truth-pair">
+      <div class="myth-box">
+        <h4>Myth #1: Mentors</h4>
+        <p>"My pastor's primary role is to minister to me." This causes church people to demand that pastors spoonfeed them and meet all their spiritual needs.</p>
+      </div>
+      <div class="truth-box">
+        <h4>Truth #1: Equipping</h4>
+        <p>A pastor's job is not primarily to minister to people but to <strong>equip people to minister to others</strong>. Life, church, and ministry are about God and others.</p>
+      </div>
+    </div>
+
+    <div class="myth-truth-pair">
+      <div class="myth-box">
+        <h4>Myth #2: Ministry</h4>
+        <p>"I'm not yet ready to be used by God." This convinces people they are too young, too old, have too many past sins, or simply don't know enough.</p>
+      </div>
+      <div class="truth-box">
+        <h4>Truth #2: Readiness</h4>
+        <p><strong>God is ready to use me now.</strong> Even if they don't feel ready, are too young, or lost their temper yesterday &mdash; God wants to use them immediately. <em>Ministry is for the <strong>messy</strong>.</em></p>
+      </div>
+    </div>
+
+    <div class="myth-truth-pair">
+      <div class="myth-box">
+        <h4>Myth #3: Maturity</h4>
+        <p>"No one should minister until they are fully mature." Believers wait forever for a framed certificate of maturity before they even attempt to minister.</p>
+      </div>
+      <div class="truth-box">
+        <h4>Truth #3: The Growth Loop</h4>
+        <p><strong>We will mature as we minister.</strong> Ministry drives maturity. No one will mature until they minister.</p>
+      </div>
+    </div>
+
+    <h3>The Equipping Shift</h3>
+    <figure class="illustration">
+      <img src="files/Pasted%20image%2020260709160556.png" alt="The Equipping Shift - Myth vs Truth" loading="lazy">
+      <figcaption>Because every believer is called to minister, we must be equipped in basic ministry skills</figcaption>
+    </figure>
+
+    <table class="shift-table">
+      <thead>
+        <tr><th>The Trap (Myth)</th><th class="arrow"></th><th>The Blueprint (Truth)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="myth-col">Pastors spoonfeed me</td><td class="arrow">&rarr;</td><td class="truth-col">Pastors equip me to minister.</td></tr>
+        <tr><td class="myth-col">I must be perfect and ready</td><td class="arrow">&rarr;</td><td class="truth-col">God is ready to use me now.</td></tr>
+        <tr><td class="myth-col">Mature first, then serve</td><td class="arrow">&rarr;</td><td class="truth-col">We mature by serving.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Tools / Environments</h4>
+    <ul>
+      <li>Victory Groups (Small groups, Life groups)</li>
+      <li>Making Disciples</li>
+    </ul>
+
+    <div class="discussion">
+      <h4>Discussion Questions</h4>
+      <ol>
+        <li>What excuse have you used in the past to prove that you weren't ready to minister?</li>
+        <li>Which discipleship myths have you believed in the past? Why?</li>
+        <li>Evaluate your current leadership development program. Do you believe in the next generation enough to place them in key roles in your church?</li>
+        <li>How long does it take for you to make a member a minister or a key leader in your church?</li>
+      </ol>
+    </div>
+
+    <div class="step-nav">
+      <a onclick="showPage('establish')"><span class="dir">&larr; Previous</span><span class="name">Establish</span></a>
+      <a onclick="showPage('empower')"><span class="dir">Next &rarr;</span><span class="name">Empower</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EMPOWER
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-empower">
+  <div class="detail-header">
+    <button class="back-btn" onclick="showPage('home')">&larr; Home</button>
+    <span class="step-pill" style="background:var(--empower);">Step 4</span>
+    <span class="page-title">Empower</span>
+  </div>
+  <div class="detail-body">
+    <h2 style="color:var(--empower);">Empower</h2>
+    <p class="speaker">Ptr. Manny &mdash; 4th Step in the Discipleship Journey &mdash; <em>Empowering Culture</em></p>
+    <span class="focus-badge badge-others">Reaching out to others</span>
+
+    <div class="scripture">
+      <strong>17</strong> And Jesus said to them, "Follow me, and I will make you become <strong>FISHERS OF MEN</strong>."
+      <span class="ref">&mdash; Mark 1:17</span>
+    </div>
+
+    <h3>The Wikipedia Principle</h3>
+    <ul>
+      <li><strong>Wiki</strong> &mdash; a Hawaiian word meaning "quick"</li>
+      <li><strong>Nupedia</strong> &mdash; an online encyclopedia written by expert volunteers with a rigorous 7-step peer-review process. Slow.</li>
+      <li><strong>Wikipedia</strong> &mdash; created by volunteers who can upload information quickly, making it immediately available to anyone.</li>
+    </ul>
+    <p>Sometimes we as leaders can <strong>slow down</strong> the process of empowering people to minister and lead.</p>
+
+    <h4>One Chapter Ahead</h4>
+    <p>A disciple maker only needs to be ahead <strong>one chapter</strong> compared to who they disciple.</p>
+
+    <div class="quote">
+      "The more we minister the more we will mature."
+      <span class="author">&mdash; Ptr. Steve Murrell</span>
+    </div>
+
+    <h3>When Do We Empower Others?</h3>
+    <h4>1. When the Foundation Has Been Laid</h4>
+
+    <div class="scripture">
+      <strong>Acts 9:1-2</strong> &mdash; Saul was breathing murderous threats to the disciples. Saul was giving approval for the killing of the saints.<br><br>
+      <strong>Acts 9:4-8</strong> &mdash; Saul encountered the Lord and was blinded and led by companion in Damascus.<br><br>
+      <strong>Acts 9:9</strong> &mdash; And for three days he was without sight, and neither ate nor drank.<br><br>
+      <strong>Acts 9:20</strong> &mdash; And <strong><u>immediately</u></strong> he proclaimed Jesus in the synagogues, saying, "He is the Son of God."
+      <span class="ref">&mdash; Acts 9</span>
+    </div>
+    <p><strong>Discipleship is not about perfection but about direction.</strong></p>
+
+    <div class="scripture">
+      <strong>Acts 9:10-15</strong> &mdash; Now there was a believer in Damascus named Ananias. The Lord spoke to him in a vision, calling, "Ananias!" "Yes, Lord!" he replied. The Lord said, "Go over to Straight Street, to the house of Judas. When you get there, ask for a man from Tarsus named Saul. He is praying to me right now."<br><br>
+      But Lord," exclaimed Ananias, "I've heard many people talk about the terrible things this man has done to the believers in Jerusalem!" ... But the Lord said, "Go, for Saul is my chosen instrument to take my message to the Gentiles and to kings, as well as to the people of Israel."
+      <span class="ref">&mdash; Acts 9:10-15</span>
+    </div>
+
+    <h4>2. Immediately</h4>
+    <p>And <strong><u>immediately</u></strong> he proclaimed Jesus in the synagogues, saying, "He is the Son of God." (Acts 9:20)</p>
+
+    <h3>The 3 Strong Foundations (Acts 2:38)</h3>
+    <ol>
+      <li><strong>Repentance</strong></li>
+      <li><strong>Water Baptism</strong></li>
+      <li><strong>Baptism in the Holy Spirit</strong></li>
+    </ol>
+
+    <h3>Results of Empowering Culture</h3>
+
+    <h4>1. Spiritual Strength is the Result of Doing Ministry</h4>
+    <div class="scripture">
+      <strong>Acts 9:22</strong> &mdash; But Saul <strong>increased</strong> all the more in <strong>strength</strong> and confounded the Jews who lived in Damascus by proving that Jesus was the Christ.
+      <span class="ref">&mdash; Acts 9:22</span>
+    </div>
+    <ul>
+      <li>Strength in ministry comes from empowering others</li>
+      <li>Creating or providing a platform for ministry unleashes innovation that serves as spiritual strength for someone</li>
+      <li>A strong disciple is formed by empowering, not spoon-feeding</li>
+    </ul>
+
+    <h4>2. Strong Relational Connections</h4>
+    <div class="scripture">
+      <strong>Acts 9:23-25</strong> &mdash; When many days had passed, the Jews plotted to kill him, but their plot became known to Saul. They were watching the gates day and night in order to kill him, but <strong><u>his disciples took him</u></strong> by night and let him down through an opening in the wall, lowering him in a basket.
+      <span class="ref">&mdash; Acts 9:23-25</span>
+    </div>
+    <p>We may never be like Paul, but we can hope and pray to be the <strong>ABC</strong> &mdash; easy to someone:</p>
+    <ul>
+      <li><strong>A</strong> &mdash; Ananias (Acts 9:10 &mdash; "Here I am, Lord.")</li>
+      <li><strong>B</strong> &mdash; Barnabas</li>
+      <li><strong>C</strong> &mdash; Church</li>
+    </ul>
+
+    <div class="scripture">
+      So the church throughout all Judea and Galilee and Samaria had peace and was being built up. And walking in the fear of the Lord and in the comfort of the Holy Spirit, it <strong>multiplied</strong>.
+      <span class="ref">&mdash; Acts 9:31</span>
+    </div>
+
+    <div class="step-nav">
+      <a onclick="showPage('equip')"><span class="dir">&larr; Previous</span><span class="name">Equip</span></a>
+      <a onclick="showPage('home')"><span class="dir">Back to</span><span class="name">Home</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SLIDES (de-emphasized, Canva embed)
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-slides">
+  <div class="detail-header">
+    <button class="back-btn" onclick="showPage('home')">&larr; Home</button>
+    <span class="page-title" style="color:var(--text-muted);">Presentation Slides</span>
+  </div>
+  <div class="slides-page-body">
+    <h2>Presentation Slides</h2>
+    <p class="slides-hint">These are the original training slides from Canva. Use the controls inside the embed to navigate between slides.</p>
+    <div class="canva-embed">
+      <iframe
+        src="https://www.canva.com/design/DAHOUUhvpYs/j7lCUamkQ3MXjG6ZKBahGg/view?embed"
+        allowfullscreen
+        loading="lazy"
+        title="4E's Discipleship Journey Presentation Slides"
+      ></iframe>
+    </div>
+  </div>
+  <footer>
+    Strategic Training for the 4E's Discipleship Journey &mdash; Victory BGC<br>
+    July 9, 2026
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<button class="theme-toggle" id="themeToggle" title="Toggle theme">&#9790;</button>
+<button class="scroll-top" id="scrollTop" title="Back to top">&#9650;</button>
+
+<script>
+(function() {
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    history.pushState(null, '', '#' + id);
+  }
+  window.showPage = showPage;
+
+  // Hash routing
+  function route() {
+    const hash = location.hash.replace('#', '') || 'home';
+    const page = document.getElementById('page-' + hash);
+    if (page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      page.classList.add('active');
+    }
+  }
+  window.addEventListener('hashchange', route);
+  route();
+
+  // Theme toggle
+  const themeBtn = document.getElementById('themeToggle');
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeBtn.innerHTML = theme === 'dark' ? '&#9728;' : '&#9790;';
+    themeBtn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  }
+  // Init from saved preference or system preference
+  const saved = localStorage.getItem('theme');
+  if (saved) { setTheme(saved); }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { setTheme('dark'); }
+
+  themeBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // Scroll-to-top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
